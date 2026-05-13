@@ -1,0 +1,44 @@
+def is_safe(board, row, col, n):
+for i in range(row):
+if board[i] == col or abs(board[i]- col) == abs(i- row):
+return False
+return True
+def solve_nqueens(n):
+solutions = []
+board = [-1] * n
+def backtrack(row):
+if row == n:
+solutions.append(board.copy())
+return
+for col in range(n):
+if is_safe(board, row, col, n):
+board[row] = col
+backtrack(row + 1)
+board[row] =-1
+backtrack(0)
+return solutions
+n = int(input("Enter value of N: "))
+solutions = solve_nqueens(n)
+print("\nTotal solutions:", len(solutions))
+for sol in solutions:
+print("\nSolution:")
+1
+for i in range(n):
+for j in range(n):
+if sol[i] == j:
+print("Q", end=" ")
+else:
+print("0", end=" ")
+print()
+Enter value of N: 4
+Total solutions: 2
+Solution:
+0 Q 0 0
+0 0 0 Q
+Q 0 0 0
+0 0 Q 0
+Solution:
+0 0 Q 0
+Q 0 0 0
+0 0 0 Q
+0 Q 0 
